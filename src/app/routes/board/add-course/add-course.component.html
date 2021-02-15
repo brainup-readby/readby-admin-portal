@@ -1,0 +1,66 @@
+<div fxLayout="row" fxLayoutAlign="end">
+    <div>
+        <a class="closeDialog" href="javascript:void(0)" (click)="destroyDailog()" >
+            <mat-icon style="color: red;">close</mat-icon>
+        </a>
+    </div>
+</div><br>
+
+<div style="width: 600px;height: auto; overflow-y: scroll;">
+    <mat-card-title class="text-center">Add Course</mat-card-title>
+
+    <form #courseForm="ngForm" (ngSubmit)="addCourse()"  class="form-field-full" novalidate>
+      <mat-form-field>
+        <mat-label>Code</mat-label>
+        <input matInput name="COURSE_CODE" [(ngModel)]="addCourseModel.COURSE_CODE"  required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput name="COURSE_NAME" [(ngModel)]="addCourseModel.COURSE_NAME" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Type</mat-label>
+        <mat-select name="COURSE_TYPE_ID" [(ngModel)]="addCourseModel.COURSE_TYPE_ID" required>
+            <mat-option *ngFor="let ctl of courseTypeList" [value]="ctl.COURSE_TYPE_ID" >{{ctl.COURSE_TYPE_NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Course Price</mat-label>
+        <input matInput name="COURSE_PRICE" #COURSE_PRICE="ngModel" [(ngModel)]="addCourseModel.COURSE_PRICE" numbersOnly autocomplete="off" required>
+      </mat-form-field>
+      <!-- <span *ngIf="addCourseModel.COURSE_PRICE <= 0" style="color: rgb(219, 88, 88);">
+        Price must be grater than 0
+      </span> -->
+        <div fxLayout="row">
+            <div fxLayoutAlign="start">
+              <div>
+                <input (change)="onFileSelected($event)" #fileInput type="file" id="file" accept="image/*"><br>
+                <span style="color: rgb(97, 97, 97);">Upload File (JPEG,PNG Only)</span>
+              </div>
+            </div>
+            <div fxLayoutAlign="start end">
+              <img [src]="imgURL" height="110" *ngIf="imgURL" />
+            </div>
+        </div>
+        <!-- <input (change)="onFileSelected($event)" #fileInput type="file" id="file" accept="image/*"><br>
+        <span style="color: rgb(97, 97, 97);">Upload File (JPEG,PNG Only)</span> -->
+      <!-- <div class="previewImg" fxLayoutAlign="start center">
+          <img [src]="imgURL" height="150" *ngIf="imgURL" />
+      </div> -->
+      <div fxLayoutAlign="center">
+        <button type="submit" mat-raised-button color="primary" [disabled]="fileInput.value == '' || !courseForm.valid" >Submit</button>
+      </div>
+    </form>
+
+  </div>
+
+
+
+<ngx-spinner  
+bdColor = "rgba(217,215,215,0.8)" 
+size = "medium" 
+color = "#37a5ee" 
+type = "ball-clip-rotate" 
+[fullScreen] = "true">
+<p style="color: white" > Loading... </p>
+</ngx-spinner>

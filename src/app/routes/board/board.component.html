@@ -1,0 +1,33 @@
+<breadcrumb [currentRoute]="'Board Management'"></breadcrumb>
+<mat-card>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [multiSelectable]="multiSelectable"
+          [rowSelectable]="rowSelectable"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped"
+          [showToolbar]="showToolbar"
+          [toolbarTitle]="'Board Management'"
+          [toolbarTemplate]= "toolbarTemp"
+          [columnHideable]="columnHideable"
+          [columnMovable]="columnMovable"
+          [expandable]="expandable"
+          [pageOnFront]="showPaginator"
+          [showPaginator]="showPaginator"
+          [pageSizeOptions]="[5,10,50,100]"
+          [pageIndex]="0"
+          [pageSize]="5" >
+</mtx-grid>
+</mat-card>
+
+<!-- <ng-template #statusCourse let-row let-index="index" let-col="colDef">
+
+    <mat-chip *ngIf="row.status === 'Active'"  style="background-color: rgb(111, 180, 0); color: white;" >{{row.status}}</mat-chip>
+    <mat-chip *ngIf="row.status === 'In-Active'"  style="background-color: rgb(223, 98, 98); color: white;" >{{row.status}}</mat-chip>
+</ng-template> -->
+<ng-template #toolbarTemp>
+    <div fxLayoutAlign="end">
+        <button mat-raised-button (click)="addBoard()">Add Board</button>
+    </div>
+</ng-template>

@@ -1,0 +1,38 @@
+<breadcrumb [currentRoute]="'Courses Management'"></breadcrumb>
+<mat-card>
+<mtx-grid [data]="courseModel"
+          [columns]="columns"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped"
+          [showToolbar]="showToolbar"
+          [toolbarTitle]="'Course Management'"
+          [columnHideable]="columnHideable"
+          [columnMovable]="columnMovable"
+          [expandable]="expandable"
+          [pageOnFront]="showPaginator"
+          [showPaginator]="showPaginator"
+          [pageSizeOptions]="[5,10,50,100]"
+          [pageIndex]="0"
+          [pageSize]="5" >
+</mtx-grid>
+</mat-card>
+<!-- <ng-template #statusCourse let-row let-index="index" let-col="colDef">
+
+    <mat-chip *ngIf="row.status === 'Active'"  style="background-color: rgb(111, 180, 0); color: white;" >{{row.status}}</mat-chip>
+    <mat-chip *ngIf="row.status === 'In-Active'"  style="background-color: rgb(223, 98, 98); color: white;" >{{row.status}}</mat-chip>
+</ng-template> -->
+<!-- <ng-template #toolbarTemp>
+    <div fxLayoutAlign="end">
+        <button mat-raised-button (click)="addCourse()">Add Courses</button>
+    </div>
+</ng-template> -->
+
+<ngx-spinner  
+      bdColor = "rgba(217,215,215,0.8)" 
+      size = "medium" 
+      color = "#37a5ee" 
+      type = "ball-clip-rotate"         
+      [fullScreen] = "true">
+      <p style="color: white" > Loading... </p>
+    </ngx-spinner>

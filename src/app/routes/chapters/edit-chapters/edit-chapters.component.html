@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayoutAlign="end">
+    <div>
+        <a class="closeDialog" href="javascript:void(0)" (click)="destroyDailog()" >
+            <mat-icon style="color: red;">close</mat-icon>
+        </a>
+    </div>
+</div><br>
+
+  <mat-card style="width: 400px;">
+    <mat-card-title class="text-center">Update Chapter</mat-card-title>
+
+    <form #f="ngForm" (ngSubmit)="updateChapter()" class="form-field-full">
+      <mat-form-field>
+        <mat-label>Code</mat-label>
+        <input matInput name="CHAPTER_CODE"
+        #CHAPTER_CODE="ngModel" [(ngModel)]="chapterModel.CHAPTER_CODE"  required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput name="CHAPTER_NAME" #CHAPTER_NAME="ngModel" [(ngModel)]="chapterModel.CHAPTER_NAME"  required>
+      </mat-form-field>
+      <div>
+        <input #file type="file" accept='image/*' 
+        (change)="onFileSelected($event)" observeFiles />
+        <div fxLayoutAlign="center">
+            <img [src]="imgURL" height="150" *ngIf="imgURL">
+        </div>
+      </div><br><br>
+      <div fxLayoutAlign="center">
+        <button [disabled]="!f.valid" mat-raised-button color="primary" >Submit</button>
+      </div>
+    </form>
+
+  </mat-card>

@@ -1,0 +1,57 @@
+<breadcrumb [currentRoute]="'User Management'"></breadcrumb>
+
+<mat-card>
+    <mtx-grid [data]="userlist"
+    [columns]="columns"
+    [multiSelectable]="false"
+    [rowSelectable]="false"
+    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+    [rowHover]="rowHover"
+    [rowStriped]="rowStriped"
+    [showToolbar]="showToolbar"
+    [toolbarTitle]="'User Management'"
+    [columnHideable]="columnHideable"
+    [columnMovable]="columnMovable"
+    [expandable]="true"
+    [expansionTemplate]="expansionUserSubscription"
+    [cellTemplate]="{logout: userLogoutTmplt}"
+    [pageOnFront]="showPaginator"
+    [showPaginator]="showPaginator"
+    [pageSizeOptions]="[5,10,50,100]"
+    [pageIndex]="0"
+    [pageSize]="5" >
+</mtx-grid>
+<ng-template #expansionUserSubscription let-row>
+
+  <mtx-grid [data]="row.USER_SUBSCRIPTION"
+  [columns]="nestedColumn"
+  [multiSelectable]="false"
+  [rowSelectable]="false"
+  [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+  [rowHover]="rowHover"
+  [rowStriped]="rowStriped"
+  [showToolbar]="false"
+  [pageOnFront]="showPaginator"
+  [showPaginator]="showPaginator"
+  [pageSizeOptions]="[5,10,50,100]"
+  [pageIndex]="0"
+  [pageSize]="5" >
+</mtx-grid>
+
+</ng-template>
+
+<ng-template #userLogoutTmplt let-row let-index="index">
+    <div style="color: rgb(252, 141, 141);">
+        <mat-icon style="cursor: pointer;" (click)="logoutUser(row.MOBILE_NO)" >logout</mat-icon>
+    </div>
+</ng-template>
+
+</mat-card>
+<ngx-spinner  
+      bdColor = "rgba(217,215,215,0.8)" 
+      size = "medium" 
+      color = "#37a5ee" 
+      type = "ball-clip-rotate" 
+      [fullScreen] = "true">
+      <p style="color: white" > Loading... </p>
+    </ngx-spinner>

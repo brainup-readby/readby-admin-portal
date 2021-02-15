@@ -1,0 +1,8 @@
+:host ::ng-deep .mtx-grid .mat-cell .mat-cell-action-button .mat-icon {
+    font-size: 24px !important;
+    border-right: 1px solid #ccc;
+}
+
+.mtx-grid .mat-cell, .mtx-grid .mat-footer-cell, .mtx-grid .mat-header-cell {
+    border-right: 1px solid #ccc !important;
+}

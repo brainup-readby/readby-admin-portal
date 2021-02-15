@@ -1,0 +1,24 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard",
+      "badge": {
+        "color": "red-500",
+        "value": "5"
+      }
+    },
+    {
+      "route": "dashboard",
+      "name": "c management",
+      "type": "link",
+      "icon": "account_balance",
+      "badge": {
+        "color": "red-500",
+        "value": "5"
+      }
+    }
+  ]
+}

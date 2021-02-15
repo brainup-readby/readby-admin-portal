@@ -1,0 +1,37 @@
+<div fxLayout="row" fxLayoutAlign="end">
+    <div>
+        <a class="closeDialog" href="javascript:void(0)" (click)="destroyDailog()" >
+            <mat-icon style="color: red;">close</mat-icon>
+        </a>
+    </div>
+</div><br>
+
+  <mat-card style="width: 400px;">
+    <mat-card-title class="text-center">Update Board</mat-card-title>
+
+    <form #f="ngForm" (ngSubmit)="editBoard()" class="form-field-full">
+      <mat-form-field>
+        <mat-label>Code</mat-label>
+        <input matInput name="BOARD_CODE"
+        #BOARD_CODE="ngModel" [(ngModel)]="boardModel.BOARD_CODE"  required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput name="BOARD_NAME" #BOARD_NAME="ngModel" [(ngModel)]="boardModel.BOARD_NAME"  required>
+      </mat-form-field>
+      <br><br>
+      <div fxLayoutAlign="center">
+        <button [disabled]="!f.valid" mat-raised-button color="primary" >Update</button>
+      </div>
+    </form>
+
+  </mat-card>
+
+  <ngx-spinner  
+  bdColor = "rgba(217,215,215,0.8)" 
+  size = "medium" 
+  color = "#37a5ee" 
+  type = "ball-clip-rotate" 
+  [fullScreen] = "true">
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>

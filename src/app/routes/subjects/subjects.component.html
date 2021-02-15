@@ -1,0 +1,73 @@
+<breadcrumb [currentRoute]="'Subject Management'"></breadcrumb>
+
+<mat-card>
+      <form #Chpfltr="ngForm" (ngSubmit)="getFilteredSubjectList()" class="example-container">
+        <mat-form-field>
+          <mat-label>Select Board</mat-label>
+          <mat-select name="boardId" [(ngModel)]="filterSubMdl.boardId" (selectionChange)="onBoardChange($event)"  required >
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let brdList of boardList"
+            [value]="brdList.BOARD_ID">{{brdList.BOARD_NAME}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select Course</mat-label>
+          <mat-select name="courseId" [(ngModel)]="filterSubMdl.courseId" (selectionChange)="onCourseChange($event)" required>
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let crslist of courseList"
+            [value]="crslist.COURSE_ID">{{crslist.COURSE_NAME}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select Year</mat-label>
+          <mat-select name="year" [(value)]="yearSelected" [(ngModel)]="filterSubMdl.yearId">
+            <mat-option *ngFor="let myrslist of masYearList"
+            [value]="myrslist.YEAR_ID">{{myrslist.DISPLAY_NAME}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select Stream</mat-label>
+          <mat-select name="streamId" [(ngModel)]="filterSubMdl.streamId" (selectionChange)="onStreamChange($event)" required>
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let msList of masStreamList" 
+              [value]="msList.STREAM_ID">{{msList.STREAM_NAME}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button type="submit" [disabled]="!Chpfltr.valid" mat-raised-button color="primary" class="btnSrhClass">
+          <mat-icon>search</mat-icon> Search</button>
+        <button type="button" (click)="Chpfltr.form.reset()" mat-raised-button color="warn" class="btnRstClass">
+          <mat-icon>clear_all</mat-icon> Reset
+        </button>
+      </form>
+    </mat-card>
+
+<mat-card>
+<mtx-grid [data]="subList"
+          [columns]="columns"
+          [multiSelectable]="false"
+          [rowSelectable]="false"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped"
+          [showToolbar]="showToolbar"
+          [toolbarTitle]="'Subject Management'"
+          [columnHideable]="columnHideable"
+          [columnMovable]="columnMovable"
+          [expandable]="expandable"
+          [pageOnFront]="showPaginator"
+          [showPaginator]="showPaginator"
+          [pageSizeOptions]="[5,10,50,100]"
+          [pageIndex]="0"
+          [pageSize]="5" >
+</mtx-grid>
+</mat-card>
+
+
+<ngx-spinner  
+      bdColor = "rgba(217,215,215,0.8)" 
+      size = "medium" 
+      color = "#37a5ee" 
+      type = "ball-clip-rotate" 
+      [fullScreen] = "true">
+      <p style="color: white" > Loading... </p>
+</ngx-spinner>

@@ -1,0 +1,30 @@
+<breadcrumb [currentRoute]="'Dashboard'"></breadcrumb>
+
+<div class="matero-row" fxLayout="row wrap">
+
+  <!-- Statistics -->
+  <div class="matero-col" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100"
+       *ngFor="let d of dashStats">
+    <mat-card>
+      <mat-card-title style="font-size: 16px; font-weight: 500;">
+         {{d.title}}</mat-card-title>
+      <mat-card-content fxLayout="row">
+        <div fxFlex="50" fxLayoutAlign="top start">
+          <h2>{{d.value}}</h2>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end">
+            <img src="assets/images/stat-icon/{{d.iconName}}.png" style="height: 45px;" />
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <ngx-spinner  
+  bdColor = "rgba(217,215,215,0.8)" 
+  size = "medium" 
+  color = "#37a5ee" 
+  type = "ball-clip-rotate" 
+  [fullScreen] = "true">
+  <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+  </div>

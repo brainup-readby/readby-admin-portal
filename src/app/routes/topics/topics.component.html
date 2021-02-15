@@ -1,0 +1,108 @@
+<breadcrumb [currentRoute]="'Topic Management'"></breadcrumb>
+
+<mat-card>
+    <form #fltr="ngForm" (ngSubmit)="getFilteredTopicList()" class="example-container">
+      <mat-form-field>
+        <mat-label>Select Board</mat-label>
+        <mat-select name="boardId" [(ngModel)]="filterMdl.boardId" (selectionChange)="onBoardChange($event)"  required >
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let brdList of boardList"
+          [value]="brdList.BOARD_ID">{{brdList.BOARD_NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Course</mat-label>
+        <mat-select name="courseId" [(ngModel)]="filterMdl.courseId" (selectionChange)="onCourseChange($event)" required>
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let crslist of courseList"
+          [value]="crslist.COURSE_ID">{{crslist.COURSE_NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Year</mat-label>
+        <mat-select name="year" [(value)]="yearSelected" [(ngModel)]="filterMdl.yearId">
+          <mat-option *ngFor="let myrslist of masYearList"
+          [value]="myrslist.YEAR_ID">{{myrslist.DISPLAY_NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Stream</mat-label>
+        <mat-select name="streamId" [(ngModel)]="filterMdl.streamId" (selectionChange)="onStreamChange($event)" required>
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let msList of masStreamList" 
+            [value]="msList.STREAM_ID">{{msList.STREAM_NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Subject</mat-label>
+        <mat-select name="subjectId" [(ngModel)]="filterMdl.subjectId" (selectionChange)="onSubjectChange($event)" required>
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let sbl of subjectList"
+          [value]="sbl.SUBJECT_ID">{{sbl.SUBJECT_NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select Chapter</mat-label>
+        <mat-select name="chapterId" [(ngModel)]="filterMdl.chapterId" (selectionChange)="onChapterChange($event)" required>
+          <mat-option>-- None --</mat-option>
+          <mat-option *ngFor="let chp of chapterList"
+          [value]="chp.CHAPTER_ID">{{chp.CHAPTER_NAME}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button type="submit" [disabled]="!fltr.valid" mat-raised-button color="primary" class="btnSrhClass">
+        <mat-icon>search</mat-icon> Search
+      </button>
+      <button type="button" (click)="fltr.form.reset()" mat-raised-button color="warn" class="btnRstClass">
+        <mat-icon>clear_all</mat-icon> Reset Filter
+      </button>
+    </form>
+</mat-card>
+
+<mat-card>
+    <mtx-grid [data]="topocList"
+    [columns]="columns"
+    [multiSelectable]="false"
+    [rowSelectable]="false"
+    [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+    [rowHover]="rowHover"
+    [rowStriped]="rowStriped"
+    [showToolbar]="showToolbar"
+    [toolbarTitle]="'Topic Management'"
+    [columnHideable]="columnHideable"
+    [columnMovable]="columnMovable"
+    [expandable]="expandable"
+    [pageOnFront]="showPaginator"
+    [showPaginator]="showPaginator"
+    [cellTemplate]="{BOOK_URL: pdfLinkTpl, VIDEO_URL: videoLink}"
+    [pageSizeOptions]="[5,10,50,100]"
+    [pageIndex]="0"
+    [pageSize]="5" >
+</mtx-grid>
+<ng-template #pdfLinkTpl let-row let-index="index" let-col="colDef">
+    <a *ngIf="row.BOOK_URL !== '' && row.BOOK_URL !== null" href="{{row.BOOK_URL}}" target="_blank"  style="color: rgb(49, 202, 18);">
+      <mat-icon>picture_as_pdf</mat-icon>
+    </a>
+    <div *ngIf="row.BOOK_URL === '' || row.BOOK_URL === null" style="color: rgb(235, 108, 108);">
+        
+        <mat-icon>visibility_off</mat-icon>
+    </div>
+    <!-- <span *ngIf="row.BOOK_URL === '' || row.BOOK_URL === null" style="color: rgb(235, 108, 108);">Not Available</span> -->
+</ng-template>
+<ng-template #videoLink let-row let-index="index" let-col="colDef">
+    <a *ngIf="row.VIDEO_URL !== '' && row.VIDEO_URL !== null" href="{{row.VIDEO_URL}}" target="_blank" style="color: rgb(49, 202, 18);">
+        <mat-icon>ondemand_video</mat-icon>
+    </a>
+    <div  *ngIf="row.VIDEO_URL === '' || row.VIDEO_URL === null" style="color: rgb(235, 108, 108);">
+        <mat-icon>videocam_off</mat-icon>
+    </div>
+    <!-- <span *ngIf="row.VIDEO_URL === '' || row.VIDEO_URL === null" style="color: rgb(235, 108, 108);">Not Available</span> -->
+</ng-template>
+</mat-card>
+<ngx-spinner  
+      bdColor = "rgba(217,215,215,0.8)" 
+      size = "medium" 
+      color = "#37a5ee" 
+      type = "ball-clip-rotate" 
+      [fullScreen] = "true">
+      <p style="color: white" > Loading... </p>
+    </ngx-spinner>
